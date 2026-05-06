@@ -76,7 +76,7 @@ main {
     border-radius: 8px;
 }
 
-.explorerButton, .triviaButton, .playAgainButton {
+.explorerButton, .triviaButton, .playAgainButton, .suggestButton {
     display: inline-block;
     padding: 5px 10px;
     margin: 20px 10px;
@@ -92,7 +92,7 @@ main {
 }
 
 .explorerButton:hover,
-.triviaButton:hover, .playAgainButton:hover {
+.triviaButton:hover, .playAgainButton:hover, .suggestButton:hover {
     background-color: #2d1cae;
     transform: translateY(-3px);
 }
@@ -757,10 +757,6 @@ ol.scoreboard {
     font-size: 14px;
 }
 
-.footer a:hover {
-    background-color: #4F39F6;
-    color: #fff;
-}
  /*TRIVIA PAGE CSS*/
  .questionAndScoreDiv{
     position: relative;
