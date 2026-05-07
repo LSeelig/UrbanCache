@@ -857,3 +857,11 @@ ol.scoreboard {
 .answer-pin{
     background-image: url('/green-pin.png');
 }
+
+/* CSS for city page maps */
+.city-map-image {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+    margin-top: 16px;
+}
