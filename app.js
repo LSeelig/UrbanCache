@@ -44,9 +44,9 @@ const db = mysql.createPool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-   /* ssl: {
-        rejectUnauthorized: true
-    } */
+   ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 // routes
@@ -74,7 +74,14 @@ app.get('/city/name/:cityName', async (req, res) => {
     const cityName = req.params.cityName;
     const [results] = await db.query("SELECT * FROM cities WHERE name = ?", [cityName]);
     if (!results) return res.send("City not found");
-    res.render('city', { city: results[0] });
+    if(req.oidc?.user){
+        const isAdministrator = Boolean(await db.query("SELECT admin FROM users WHERE auth0_id = ?", req.oidc?.user.sub));
+        if(isAdministrator){
+            const questions = await db.query("SELECT * FROM questions WHERE city_id = ?", results[0].id);
+            res.render('city', { city: results[0], isAdmin: isAdministrator, questions: questions[0] });
+        }
+    }
+    else res.render('city', { city: results[0], isAdmin: false });
 });
 
 // profile
