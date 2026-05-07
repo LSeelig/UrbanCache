@@ -77,7 +77,7 @@
         let score = 0;
 
         // Part of the function that makes sure the pop-up is closed before it lets you guess again
-        let canGuess = false;
+        let canGuess = true;
 
         //sends final score to database
         function submitScore(finalScore) {
@@ -133,27 +133,6 @@
             document.querySelectorAll('.pin').forEach(pin => pin.remove());
         }
 
-        function nextQuestion(){
-            //QUESTION ROTATING STUFF hide current question
-                questions[current].style.display = 'none';
-                // move to next question
-                current++;
-                // if there is another question, show it
-                if (current < questions.length) {
-                    questions[current].style.display = 'block';
-                } else {
-                // optional: end of quiz
-                    document.getElementById('finalScore').textContent = score;
-                    endQuizPopup.style.display = 'block';
-                    submitScore(score);
-                    /* alert("Quiz finished!");
-                    setTimeout(() => {
-                        window.location.href="http://localhost:3000";
-                    }, 1000); */
-                    
-                }
-        }
-
         //update score variable
        /*  function updateScoreVar(newScoreAddition, score){
             score += newScoreAddition;
@@ -176,7 +155,6 @@
             overlay.style.display = 'block';
             closeBtn.addEventListener('click', () => {
                 overlay.style.display = 'none';
-                canGuess = true;
             });
 
             const correctPopup = document.getElementById('correctOverlay');
@@ -275,6 +253,25 @@
                //updateScreenScore(score, scoreDisplay);
                scoreDisplay.textContent = "Score:" + score;
 
+
+                //QUESTION ROTATING STUFF hide current question
+                questions[current].style.display = 'none';
+                // move to next question
+                current++;
+                // if there is another question, show it
+                if (current < questions.length) {
+                    questions[current].style.display = 'block';
+                } else {
+                // optional: end of quiz
+                document.getElementById('finalScore').textContent = score;
+                endQuizPopup.style.display = 'block';
+                submitScore(score);
+                    /* alert("Quiz finished!");
+                    setTimeout(() => {
+                        window.location.href="http://localhost:3000";
+                    }, 1000); */
+                    
+                }
 
             });
 
