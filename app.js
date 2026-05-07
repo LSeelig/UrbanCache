@@ -74,7 +74,11 @@ app.get('/city/name/:cityName', async (req, res) => {
     const cityName = req.params.cityName;
     const [results] = await db.query("SELECT * FROM cities WHERE name = ?", [cityName]);
     if (!results) return res.send("City not found");
-    res.render('city', { city: results[0] });
+    if(isAuthenticated){
+        const questions = await db.query("SELECT * FROM questions WHERE city_id = ?", results[0].city_id);
+        res.render('city', { city: results[0], isAdmin: isAuthenticated, questions: questions });
+    }
+    res.render('city', { city: results[0], isAdmin: isAuthenticated });
 });
 
 // profile

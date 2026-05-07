@@ -25,4 +25,15 @@
         <!-- add city map image with pin here once images collected! will need to redo sql dump to have a field for the image-->
     </div>
 </div>
+<% if(isAdmin){ %>
+    <%# display questions for admins %>
+        <ul>
+            <% questions.forEach(question => { %>
+                <li><%=question%></li>
+            <% }); %>
+        </ul>
+    <div>
+
+    </div>
+<% } %>
 <%- include('../partials/foot') %>
