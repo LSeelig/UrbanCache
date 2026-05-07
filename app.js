@@ -74,11 +74,14 @@ app.get('/city/name/:cityName', async (req, res) => {
     const cityName = req.params.cityName;
     const [results] = await db.query("SELECT * FROM cities WHERE name = ?", [cityName]);
     if (!results) return res.send("City not found");
-    if(isAuthenticated){
-        const questions = await db.query("SELECT * FROM questions WHERE city_id = ?", results[0].city_id);
-        res.render('city', { city: results[0], isAdmin: isAuthenticated, questions: questions });
+    if(req.oidc?.user){
+        const isAdministrator = Boolean(await db.query("SELECT admin FROM users WHERE auth0_id = ?", req.oidc?.user.sub));
+        if(isAdministrator){
+            const questions = await db.query("SELECT * FROM questions WHERE city_id = ?", results[0].id);
+            res.render('city', { city: results[0], isAdmin: isAdministrator, questions: questions[0] });
+        }
     }
-    res.render('city', { city: results[0], isAdmin: isAuthenticated });
+    else res.render('city', { city: results[0], isAdmin: false });
 });
 
 // profile
