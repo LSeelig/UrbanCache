@@ -73,7 +73,7 @@ app.get('/cityExplorer', async (req, res) => {
 app.get('/city/name/:cityName', async (req, res) => {
     const cityName = req.params.cityName;
     const [results] = await db.query("SELECT * FROM cities WHERE name = ?", [cityName]);
-    if (results.length === 0) return res.send("City not found");
+    if (!results) return res.send("City not found");
     res.render('city', { city: results[0] });
 });
 
@@ -133,7 +133,7 @@ app.post('/profile/edit', requiresAuth(), async (req, res) => {
 // viewing the leaderboard
 app.get('/leaderboard', async (req, res) => {
     const [results] = await db.query("SELECT * FROM users ORDER BY best_score DESC LIMIT 10");
-    if (results.length === 0) return res.send("Scores not found");
+    if (!results) return res.send("Scores not found");
     res.render('leaderboard', { scores: results });
 });
 

@@ -7,10 +7,10 @@
 
 
     <!-- for each loop that take the quizArray and only shows the first question -->
-    <!-- q.innerArrID and q.cityAnswerID is what shows answers on screen for debugging, NEEDS TO BE REMOVED -->
+    <!-- q.innerArrID and q.cityAnswerID is what shows answers on screen for debugging -->
 
     <% quizArray.forEach((q, index) => { %>
-        <div class="question" style="<%= index === 0 ? '' : 'display:none;' %>">
+        <div class="question" style=<%= index === 0 ? '' : 'display:none;' %>>
             
             <div class = "individualQuestion"> 
                 <%= q.question %>
@@ -19,7 +19,7 @@
     <% }) %>
     </div>
 
-    <% console.log("javaScript tags working"); %>
+    <%# console.log("javaScript tags working"); %>
 
     <div class="mapDiv">
         <img class="map" src="/urbanMapFinal.png" alt="Description of image">
@@ -37,7 +37,7 @@
             </p>
         </div>
     </div>
-  
+
     <!-- div for correct answer popup -->
     <div id = correctOverlay class = "popups">
         <div class = popupContent>
@@ -96,24 +96,16 @@
 
         //calculate distance between the users click on map and the actually correct coordinate point. 
         function getDistance(normX, normY, cityX, cityY) {
-               const xSubtract = Math.pow(normX - cityX, 2);
-               const ySubtract = Math.pow(normY - cityY, 2);
-               return Math.sqrt((xSubtract + ySubtract));
-               }
+           const xSubtract = Math.pow(normX - cityX, 2);
+           const ySubtract = Math.pow(normY - cityY, 2);
+           return Math.sqrt((xSubtract + ySubtract));
+        }
         //takes in the distance and returns a score based on how close it to correct.
         function getPointsEarned(dist) {
-            if (dist < .008) {
-                return 500;
-            }
-            else if (dist < .05) {
-                return 300;
-            }
-            else if (dist < .1) {
-                return 50;
-            }
-            else {
-                return 0;
-            }
+            if     (dist < .008) return 500;
+            else if (dist < .05) return 300;
+            else if  (dist < .1) return 50;
+            else                 return 0;
         }
         
         // func showScore on screen (ex. +700 points) takes in points earned and simply displays it (like an alert)
