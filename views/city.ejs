@@ -23,8 +23,12 @@
         <h3>Visit <%= city.name %></h3>
         <p>Ready to see these sights in person? <br> Exploring <%= city.name %> supports local economies and promotes global cultural exchange.</p>
         <!-- add city map image with pin here once images collected! will need to redo sql dump to have a field for the image-->
+         <% if (city.mapImagePath) { %>
+            <img src = "<%= city.mapImagePath %>" class = "city-map-image">
+        <% } %>
     </div>
 </div>
+<%- include('../partials/foot') %>
 <% if(isAdmin){ %>
     <%# display questions for admins %>
     <div style="background-color: aqua;">
