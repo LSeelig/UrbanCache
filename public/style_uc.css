@@ -76,7 +76,7 @@ main {
     border-radius: 8px;
 }
 
-.explorerButton, .triviaButton, .playAgainButton, .suggestButton {
+.explorerButton, .triviaButton, .playAgainButton, .suggestButton, .feedbackButton {
     display: inline-block;
     padding: 5px 10px;
     margin: 20px 10px;
@@ -92,7 +92,7 @@ main {
 }
 
 .explorerButton:hover,
-.triviaButton:hover, .playAgainButton:hover, .suggestButton:hover {
+.triviaButton:hover, .playAgainButton:hover, .suggestButton:hover, .feedbackButton:hover {
     background-color: #2d1cae;
     transform: translateY(-3px);
 }
@@ -738,7 +738,7 @@ ol.scoreboard {
 
 .footer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     background-color: #f1f1f1;
     padding: 12px 0;
